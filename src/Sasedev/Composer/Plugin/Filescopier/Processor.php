@@ -62,8 +62,15 @@ class Processor
 
 		//$dest = $config['dest'];
 
-		$path = __DIR__; //$this->composer->getConfig()->get('home');
-		$this->io->write('current path : '.$path);
+
+		$home = $this->composer->getConfig()->get('home');
+		$this->io->write('current home : '.$home);
+		$current_dir = __DIR__;
+		$this->io->write('current dir : '.$current_dir);
+		$vendor_dir = $this->composer->getConfig()->get('vendor-dir');
+		$this->io->write('current vendor dir : '.$vendor_dir);
+		$bin_dir = $this->composer->getConfig()->get('bin-dir');
+		$this->io->write('current bin dir : '.$bin_dir);
 
 		/*
 
@@ -94,6 +101,10 @@ class Processor
 
 		if (empty($config['dest'])) {
 			throw new \InvalidArgumentException('The extra.filescopier.dest setting is required to use this script handler.');
+		}
+
+		if (empty($config['level']) || !\is_int($config['level'])) {
+			$config['level'] = -1;
 		}
 
 		return $config;
