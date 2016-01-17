@@ -6,20 +6,74 @@ use Composer\Autoload\AutoloadGenerator;
 use Composer\Composer;
 use Composer\Config;
 use Composer\Installer\PluginInstaller;
-use Composer\Package\CompletePackage;
+use Composer\Package\AliasPackage;
 use Composer\Package\Loader\ArrayLoader;
 use Composer\Package\Loader\JsonLoader;
+use Composer\Package\CompletePackage;
 use Composer\Plugin\PluginManager;
-use Composer\TestCase;
+use Composer\Semver\VersionParser;
+use Composer\Semver\Constraint\Constraint;
 use Composer\Util\Filesystem;
-use Sasedev\Composer\Plugin\Filescopier\ScriptHandler;
 
 /**
  *
  * @author sasedev <seif.salah@gmail.com>
  */
-class ScriptHandlerTest extends TestCase
+class ScriptHandlerTest extends \PHPUnit_Framework_TestCase
 {
+
+	private static $parser;
+
+	protected static function getVersionParser()
+	{
+
+		if (!self::$parser) {
+			self::$parser = new VersionParser();
+		}
+
+		return self::$parser;
+
+	}
+
+	protected function getVersionConstraint($operator, $version)
+	{
+
+		$constraint = new Constraint($operator, self::getVersionParser()->normalize($version));
+
+		$constraint->setPrettyString($operator . ' ' . $version);
+
+		return $constraint;
+
+	}
+
+	protected function getPackage($name, $version, $class = 'Composer\Package\Package')
+	{
+
+		$normVersion = self::getVersionParser()->normalize($version);
+
+		return new $class($name, $normVersion, $version);
+
+	}
+
+	protected function getAliasPackage($package, $version)
+	{
+
+		$normVersion = self::getVersionParser()->normalize($version);
+
+		return new AliasPackage($package, $normVersion, $version);
+
+	}
+
+	protected function ensureDirectoryExistsAndClear($directory)
+	{
+
+		$fs = new Filesystem();
+		if (is_dir($directory)) {
+			$fs->removeDirectory($directory);
+		}
+		mkdir($directory, 0777, true);
+
+	}
 
 	/**
 	 *
@@ -78,7 +132,6 @@ class ScriptHandlerTest extends TestCase
 		mkdir(dirname($this->directory . $filename), 0777, true);
 		$this->package = $loader->load(__DIR__ . $filename);
 
-
 		$dm = $this->getMockBuilder('Composer\Downloader\DownloadManager')
 			->disableOriginalConstructor()
 			->getMock();
@@ -96,11 +149,10 @@ class ScriptHandlerTest extends TestCase
 		$im->expects($this->any())
 			->method('getInstallPath')
 			->will(
-			$this->returnCallback(
-				function ($package)
-				{
-					return __DIR__ . '/Fixtures/' . $package->getPrettyName();
-				}));
+			$this->returnCallback(function ($package)
+			{
+				return __DIR__ . '/Fixtures/' . $package->getPrettyName();
+			}));
 
 		$this->io = $this->getMock('Composer\IO\IOInterface');
 
