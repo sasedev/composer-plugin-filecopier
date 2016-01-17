@@ -62,7 +62,7 @@ class Processor
 
 		//$dest = $config['dest'];
 
-		$path = $this->composer->getConfig()->get('home');
+		$path = __DIR__; //$this->composer->getConfig()->get('home');
 		$this->io->write('current path : '.$path);
 
 		/*
