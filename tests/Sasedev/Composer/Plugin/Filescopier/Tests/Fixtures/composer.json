@@ -12,6 +12,7 @@
 	],
 	"homepage" : "https://sasedev.net/",
 	"type" : "library",
+	"version": "1.0.0",
 	"repositories" : [{
 			"type" : "package",
 			"package" : {

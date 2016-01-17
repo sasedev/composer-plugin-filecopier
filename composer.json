@@ -23,12 +23,11 @@
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : "~4.8|~5.1",
-		"composer/composer" : "^1.0|1.0@dev"
+		"composer/composer" : "^1.0|1.0.x@dev"
 	},
 	"require" : {
 		"php" : ">=5.5",
-		"composer-plugin-api" : "^1.0",
-		"composer/composer" : "^1.0|1.0@dev"
+		"composer-plugin-api" : "^1.0"
 	},
 	"extra" : {
 		"class" : "Sasedev\\Composer\\Plugin\\Filescopier\\ScriptHandler",

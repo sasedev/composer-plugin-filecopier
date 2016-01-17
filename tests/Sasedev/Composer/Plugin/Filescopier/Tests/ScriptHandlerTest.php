@@ -203,7 +203,7 @@ class ScriptHandlerTest extends \PHPUnit_Framework_TestCase
 		$installer->install($this->repository, $this->package);
 
 		$plugins = $this->pm->getPlugins();
-		$this->assertEquals('installer-v1', $plugins[0]->version);
+		$this->assertEquals('sasedev/composer-plugin-filecopier-test', $plugins[0]->version);
 
 	}
 
