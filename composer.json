@@ -2,7 +2,8 @@
 	"name" : "sasedev/composer-plugin-filecopier",
 	"description" : "Composer Plugin Mass Files Copier",
 	"keywords" : [
-		"files copier"
+		"files copier",
+		"composer plugin"
 	],
 	"license" : "MIT",
 	"authors" : [{
