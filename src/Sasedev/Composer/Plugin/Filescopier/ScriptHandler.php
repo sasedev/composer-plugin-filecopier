@@ -47,7 +47,7 @@ class ScriptHandler implements PluginInterface, EventSubscriberInterface
 	 *
 	 * @see \Composer\EventDispatcher\EventSubscriberInterface::getSubscribedEvents()
 	 */
-	public function getSubscribedEvents()
+	public static function getSubscribedEvents()
 	{
 
 		return array(
