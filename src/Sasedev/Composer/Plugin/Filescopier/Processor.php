@@ -72,6 +72,11 @@ class Processor
 		$bin_dir = $this->composer->getConfig()->get('bin-dir');
 		$this->io->write('current bin dir : '.$bin_dir);
 
+		$config_all = $this->composer->getConfig()->all();
+		foreach ($config_all['config'] as $key => $value) {
+			$this->io->write('key : '.$key.'   |   value : '.$value);
+		}
+
 		/*
 
 		if (!is_dir($dest)) {
