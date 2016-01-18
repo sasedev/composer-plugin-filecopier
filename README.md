@@ -30,7 +30,7 @@ Installation / Usage
     }
     ```
 
-or
+    or
 
     ``` json
     {
