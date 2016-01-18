@@ -32,7 +32,7 @@ Installation / Usage
 
 or
 
-    ```
+    ``` json
     {
         "extra": {
             "filescopier" : [
