@@ -59,7 +59,7 @@ class Processor
 
 		$this->io->write('[sasedev/composer-plugin-filecopier] init destination : '.$destination);
 
-		$sources = glob($source, GLOB_MARK);
+		$sources = \glob($source, GLOB_MARK);
 		if (!empty($sources)) {
 			foreach ($sources as $newsource) {
 				$this->copyr($newsource, $destination, $project_path);
