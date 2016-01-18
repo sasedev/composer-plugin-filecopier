@@ -21,11 +21,12 @@ Installation / Usage
 
     ``` json
     {
-        "extra":
+        "extra": {
             "filescopier" : {
                 "source" : "vendor/twbs/bootstrap/less",
                 "destination" : "var/less/bootstrap"
             }
+        }
     }
     ```
 
@@ -33,7 +34,7 @@ or
 
     ```
     {
-        "extra":
+        "extra": {
             "filescopier" : [
                 {
                     "source" : "vendor/twbs/bootstrap/less",
@@ -46,6 +47,7 @@ or
                     "destination" : "var/test"
                 }
             ]
+        }
     }
     ```
 
