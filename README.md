@@ -51,6 +51,7 @@ or
     }
     ```
 
+
     > **Note:** The destination element must be a folder. if the destination folder does not exists, it is recursively created using `mkdir($destination, 0755, true)`.
     > **Note:** If the destination folder is not an absolute path, the relative path is calculated using the vendorDir path (`$project_path = \realpath($this->composer->getConfig()->get('vendor-dir').'/../').'/'`)
     > **Note:** The source element is evaluated using the php function `glob($source, GLOB_MARK)` and a recursive copy is made for every result of this function into the destination folder
