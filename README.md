@@ -1,7 +1,9 @@
 Composer Plugin Files Copier
 ========================================
 
-this is a very simple Composer plugin working on the `post-install-cmd` and `post-update-cmd` events for copying from a source path to a distination forlder.
+This is a very simple Composer plugin working on the `post-install-cmd` and `post-update-cmd` events for copying from a source path to a distination folder.
+
+I created this to avoid copying manualy the bootstrap less files into a temporary folder and overriding the variables.less for generating a custom bootstrap.css file using the less filter from the [symfony/assetic-bundle](https://github.com/symfony/assetic-bundle).
 
 
 Installation / Usage
