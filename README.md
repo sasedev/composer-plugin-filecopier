@@ -14,7 +14,7 @@ Installation / Usage
     ``` json
     {
         "require": {
-            "sasedev/composer-plugin-filecopier": ">=1.0.0"
+            "sasedev/composer-plugin-filecopier": ">=1.1.0"
         }
     }
     ```
