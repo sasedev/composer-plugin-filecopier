@@ -26,7 +26,8 @@ Installation / Usage
         "extra": {
             "filescopier" : {
                 "source" : "vendor/twbs/bootstrap/less",
-                "destination" : "var/less/bootstrap"
+                "destination" : "var/less/bootstrap",
+                "debug": "true"
             }
         }
     }
@@ -40,7 +41,8 @@ Installation / Usage
             "filescopier" : [
                 {
                     "source" : "vendor/twbs/bootstrap/less",
-                    "destination" : "var/less/bootstrap"
+                    "destination" : "var/less/bootstrap",
+                    "debug": "true"
                 }, {
                     "source" : "src/Sasedev/ResBundle/Resources/less/bootstrap/*.less",
                     "destination" : "var/less/bootstrap"
