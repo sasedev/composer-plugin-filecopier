@@ -5,6 +5,7 @@ namespace Sasedev\Composer\Plugin\Filescopier;
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\IO\IOInterface;
+use Composer\Package\PackageInterface;
 use Composer\Plugin\PluginInterface;
 use Composer\Script\Event;
 
@@ -77,13 +78,26 @@ class ScriptHandler implements PluginInterface, EventSubscriberInterface
 	public static function buildParameters(Event $event)
 	{
 
-		$IO = $event->getIO();
-		$composer = $event->getComposer();
+      $composer = $event->getComposer();
+      $installedPackages = $composer
+			->getRepositoryManager()
+			->getLocalRepository()
+			->getCanonicalPackages();
+        $installedPackages[] = $composer->getPackage();
+		foreach ($installedPackages as $package) {
+			self::copyFiles($event, $package);
+		}
 
-		$extras = $composer->getPackage()->getExtra();
-		if (!isset($extras['filescopier'])) {
-			$IO->write('The parameter handler needs to be configured through the extra.filescopier setting.');
-		} else {
+	}
+
+	/**
+	 * @param \Composer\Script\Event $event
+	 * @param \Composer\Package\PackageInterface $package
+	 */
+	protected static function copyFiles(Event $event, PackageInterface $package)
+	{
+		$extras = $package->getExtra();
+		if (isset($extras['filescopier'])) {
 			$configs = $extras['filescopier'];
 			if (!is_array($configs)) {
 				throw new \InvalidArgumentException('The extra.filescopier setting must be an array or a configuration object.');
@@ -105,7 +119,6 @@ class ScriptHandler implements PluginInterface, EventSubscriberInterface
 				$processor->processCopy($config);
 			}
 		}
-
 	}
 
 }
