@@ -78,10 +78,12 @@ class ScriptHandler implements PluginInterface, EventSubscriberInterface
 	public static function buildParameters(Event $event)
 	{
 
-		$installedPackages = $event->getComposer()
+      $composer = $event->getComposer();
+      $installedPackages = $composer
 			->getRepositoryManager()
 			->getLocalRepository()
 			->getCanonicalPackages();
+        $installedPackages[] = $composer->getPackage();
 		foreach ($installedPackages as $package) {
 			self::copyFiles($event, $package);
 		}
